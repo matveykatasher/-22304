@@ -1,54 +1,65 @@
+#define data 100
 #include <stdio.h>
 #include <math.h>
+int Mas[data];
 
-#define MAX_SIZE 100//#define имя_макроса последовательность_символов
-
-int array[MAX_SIZE];
-
-typedef struct result{
-    int min, max;
-    double avg, rms;
-}result ;
-
-result calc(int n){
-    result res;
-    res.avg = res.rms = 0;
-    res.max = res.min = array[0];
-    for (int i = 0; i < n; i++){
-        if (array[i] < res.min)
-            res.min = array[i];
-        if (array[i] > res.max)
-            res.max = array[i];
-        res.avg += array[i];
-        res.rms += pow(array[i], 2);
-    }
-    res.avg /= n;
-    res.rms = pow(res.rms / n - pow(res.avg, 2), 0.5);
-    return res;
+int Max (int numb) {
+	int i, max=0;
+	int* pMas;
+	for (i=1, pMas=Mas;i<=numb;i++) {
+		if (*(pMas+i)>max) {
+			max=*(pMas+i);
+		}
+	}
+	return (max);
 }
 
-int main() {
-    int n;
-    result res;
-    char input;
-    printf("речь max, min, avg, rms\n");
-    while (1) {
-        printf("введите размер массива (%d maximum)\n", MAX_SIZE);
-        scanf_s("%d", &n);
-        if (n > 100){
-            printf("ошибка в размере\n");
-            continue;
-        }
-        printf("введите элементы массиваy\n");
-        for (int i = 0; i < n; i++) {
-            scanf_s("%d", &array[i]);
-        }
-        res = calc(n);
-        printf("min %d\nmax %d\navg %f\nrms %f\n", res.min, res.max, res.avg, res.rms);
-        printf("правильно посчитано ? (y/n)\n");
-        scanf_s(" %c", &input);
-        if (input == 'n')
-            break;
-    }
-    return 0;
+int Min (int numb) {
+	int* pMas;
+	int i=1, min=Max(numb);
+	for (i=1, pMas=Mas;i<=numb;i++) {
+		if (*(pMas+i)<min) {
+			min=*(pMas+i);
+		}
+	}
+	return (min);
+}
+
+float Mean (int numb) {
+	int i;
+	float count=0;
+	for(i=1;i<=numb;i++) {
+		count+=Mas[i];
+	}
+	count/=numb;
+	return (count);
+}
+
+float RMS (int numb) {
+	int i;
+	float S=0;
+	for (i=1;i<=numb;i++) {
+		S+=pow(Mas[i]-Mean(numb),2);
+	}
+	S/=numb;
+	return(sqrt(S));
+}
+
+int main()
+{
+	printf ("Эта программа вычисляет максимум, минимум, среднее\
+ значение, среднеквадратичное отклонение во введенном статическом\
+ массиве\nВведите размер массива\n"); 
+	int numb, i;
+	int s = scanf ("%d", &numb);
+	if (s<1) {
+		printf("Вы ввели неправильный тип перемонной");
+		return (90);
+	}
+	for(i=1;i<=numb;i++) {
+		printf ("Введите %d элемент\n", i);
+		scanf ("%d", &Mas[i]);
+	}
+	printf ("\n\nMax = %d\nMin = %d\nMean = %f\nRMS = %f\n", Max(numb), Min(numb), Mean(numb), RMS(numb));
+	return 0;
 }

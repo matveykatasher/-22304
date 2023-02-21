@@ -1,59 +1,29 @@
 #include <stdio.h>
 #include <math.h>
-#include <float.h>
 
-float func(float x){
-    return cos(x);
+double Func (float x){ //интереумая функция
+	double value;
+	value = 1/logl(x); //самостоятельно вводим интересуемую нами функцию
+	return (value);
 }
 
-float func_d2(float x){
-    return -sin(x);
-}
-
-int integral(){
-    float a, b, delta, tmp_y, y, x, res = 0, max_d2 = -FLT_MAX, accuracy;
-    int n;
-    printf("\nEnter A, B\n");
-    scanf_s("%f %f", &a, &b);
-    if (a >= b)
-        return 1;
-    printf("Enter number of segments\n");
-    scanf_s("%d", &n);
-    if (n <= 2)
-        return 2;
-    delta = (b - a) / n;
-    tmp_y = func(a);
-    x = a + delta;
-    for (int i = 1; i <=n; i++){
-        y = func(a + i * delta);
-        res += (y + tmp_y)/2;
-        tmp_y = y;
-        if (func_d2(a + i * delta) > max_d2)
-            max_d2 = func_d2(a + i * delta);
-    }
-    res = res * (b - a) / n;
-    accuracy = pow(delta, 2) * (b - a) * max_d2 / 12;
-    printf("Integral = %f\n", res);
-    printf("Accuracy = %f\n", fabs(accuracy));
-    return 0;
-}
-
-int main() {
-    int error_code;
-    char input;
-    printf("Calculating integral of f(x) from A to B\n");
-    while (1){
-        error_code = integral();
-        if (error_code == 1)
-            printf("Wrong integral limits (b > a), try again\n");
-        if (error_code == 2)
-            printf("Wrong number of segments, try again\n");
-        if (error_code == 0){
-            printf("Continue calculations ? (y/n)");
-            scanf_s(" %c", &input);
-            if (input == 'n')
-                break;
-        }
-    }
-    return 0;
+int main()
+{
+	int step, i;
+	double a, b, h, integral, result;
+	int s = scanf ("%lf %lf %d", &a, &b, &step);
+	if (s<3) {
+		printf("error");
+		return (90);
+	}
+	h=(b-a)/step; //вычисляем длину каждого шага
+	integral=(Func(a)+Func(b))/2; /*это первый член суммы по методу 
+	трапеции */
+	for(i=1;i<step;i++) {
+		a+=h;
+		integral+=Func(a);
+	}
+	result = h*integral;
+	printf ("%lf\n", result);
+	return 0;
 }
