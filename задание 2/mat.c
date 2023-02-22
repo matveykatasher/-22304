@@ -1,6 +1,7 @@
 # include <stdio.h>
 # include <stdbool.h>
-# include <math.h>
+# include <math.h>	
+
 bool isPrime(int n)
 {
 	if (n == 1 || n == 0)

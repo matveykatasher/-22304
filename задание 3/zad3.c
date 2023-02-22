@@ -1,19 +1,47 @@
 #include <stdio.h>
-#include <math.h>
 
-int main() {
-    double result, pii = 0, pi = 4, n; //pii это прем значение
-    int N, i = 1;//N колличество знаков
-    printf("Введите колличество знаков: ");
-    scanf_s("%d", &N);
-    for (i = 1 ; ; i ++){
-        if (fabs(pi - tmp_pi) <= 1/pow(10, N))//Функция pow() возвращает значение base, возведенное в степень ехр:Функция fabs() возвращает абсолютную величину аргумента num.
-            break;
-        tmp_pi = pi;
-        pi +=  4 / ((2*i + 1) *  pow(-1, i));
-    }
-    result = (pi + tmp_pi) / 2;
-    printf("Pi = %.*f\n",precision, (double)(((int)(result*pow(10,N)))/pow(10,N)));
-    scanf("%d",&n);
-    return 0;
+int main()
+{
+	printf ("Эта программа выводит число Pi с точностью до того\
+ знакого, которого потребовал пользователь\nВведите число до коготорого\
+ хотите посчитать число Pi\n");
+	int i, numb=0, n=0;
+	double count=1, S1=0, S2=0;
+	int s = scanf ("%d", &numb);
+	if ((numb<0)||(s<1)) {
+		printf("Вы ввели неправильный тип перемонной");
+		return (90);
+	}
+	for (i=1;i<=numb;i++) { /*мы высчитываем точность до которой
+		 хотим посчитать число Pi*/
+		count/=10;
+	}
+	do {
+		n++;
+		S1=S2+(4.0/(2*n-1));
+		n++;
+		S2=S1-(4.0/(2*n-1));
+	}
+	while ((S1-S2)>count);
+	switch (numb) {	
+	case 0: printf ("%.f\n", (float)((S1+S2)/2));
+	break;
+	case 1: printf ("%.1f\n", (float)((S1+S2)/2));
+	break;
+	case 2: printf ("%.2f\n", (float)((S1+S2)/2));
+	break;
+	case 3: printf ("%.3f\n", (float)((S1+S2)/2));
+	break;
+	case 4: printf ("%.4f\n", (float)((S1+S2)/2));
+	break;
+	case 5: printf ("%.5f\n", (float)((S1+S2)/2));
+	break;
+	default: printf ("%f\n", (float)((S1+S2)/2));
+	break; 
+	}
+	printf("%d", n);
+    int c;
+    scanf ("%d", &c);
+	return 0;
 }
+
