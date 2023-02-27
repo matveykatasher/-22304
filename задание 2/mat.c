@@ -20,10 +20,15 @@ int main()
 	int N;
 	printf("enter N\n");
 	scanf("%d", &N);
-		for (int i = 1; i <= N; i++) {
-		if (isPrime(i))
-			printf("%d ", i);
-	}
+		for (int i = 1; i <= N; i++) 
+		{
+			if (isPrime(i))
+			{
+				printf("%d ", i);
+			}
+		}
+	int L;
+	scanf("%d",&L);
 	return 0;
 }
 
