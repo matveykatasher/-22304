@@ -60,7 +60,7 @@ int main()
 		printf("You entered the wrong variable type");
 		return (90);//если код ошибки 90, значит введён неправильный тип переменной
 	}
-	int* DMas = (int*) malloc(array_size*sizeof(int*));//создаём динамический массив
+	int* DMas = (int*) malloc(array_size*sizeof(int));//создаём динамический массив
 	for(i=1;i<=array_size;i++) {
 		printf ("Enter the %d item:\n", i);
 		scanf ("%d", &DMas[i]);//вводим значение для каждого элемента массива
@@ -68,7 +68,7 @@ int main()
 	char direct;
 	printf ("In what direction should I sort? Descending (<), or ascending (>), or absolutely (!)?\n");//выбор направления по сортировке
 	scanf (" %c", &direct);
-	Replace (DMas, array_size, direct);//сортируем
+	Replace (DMas, array_size, direct);//сортируем переминивовать в bubblesort
 	for(i=1;i<=array_size;i++) {
 		printf ("DMas [%d] = %d\n", i ,DMas[i]);//выводим отсортированный массив
 	}

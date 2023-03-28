@@ -1,6 +1,8 @@
-#define data 100
 #include <stdio.h>
 #include <math.h>
+
+#define data 100
+
 int Mas[data];
 
 int Max (int numb) {
@@ -35,13 +37,13 @@ float Mean (int numb) {
 	return (count);
 }
 
-float RMS (int numb) {
+float RMS(int numb) {
 	int i;
-	float S=0;
-	for (i=1;i<=numb;i++) {
-		S+=pow(Mas[i]-Mean(numb),2);
+	float S = 0;
+	for (i = 1; i <= numb; i++) {
+		S += pow(Mas[i] - Mean(numb), 2);
 	}
-	S/=numb;
+	S /= numb;
 	return(sqrt(S));
 }
 

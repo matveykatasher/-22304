@@ -14,7 +14,7 @@ double dFunc (float x){ //производная к интересуемой н�
 	return (d_value);//возвращение значения производной функции
 }
 
-int main()
+int main()//сделать унифицированную роизводную функции числинное  диф
 {
 	printf ("This program solves an equation of the form F(x) = 0 by Newton's method\nEnter the initial approximation and the required accuracy of the calculation\n");//приветствие
 	int accuracy=0;
